@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro com LocalStorage</title>
+    
+</head>
+<header>    
+    <div class="LOGOMARCA">    
+        <img class="logo" src="Logo.png">
+    </div>
+        <h1>Cadastro</h1>
+    <span class="menu-btn" onclick="toggleMenu()">&#9776; Menu</span>
+</header>
+
+<nav id="main-menu">
+    <a href="Pagina_inicial.html">Home</a>
+    <a href="Pagina_cadastro.html">Cadastro</a>
+    <a href="Pagina_lista.html">Lista de usuarios</a>
+    <a href="Pagina_loja.html">LOJA</a>
+</nav>
+<body>
+    <form id="cadastroForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <label for="admin">É administrador:</label>
+        <input type="checkbox" id="admin" name="admin">
+
+        <button type="button" onclick="cadastrar()">Cadastrar</button>
+    </form>
+    <div class="botao-flutuante" onclick="toggleChatbox()">
+        <div class="icone">🤖</div>
+    </div>
+    
+    <div id="chatbox">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Digite sua mensagem" onkeydown="sendMessage(event)">
+    </div>
+
+    <script>
+        function cadastrar() {
+            // Obter valores do formulário
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('senha').value;
+
+            // Criar objeto de usuário
+            var usuario = {
+                nome: nome,
+                email: email,
+                senha: senha
+            };
+
+            // Obter lista de usuários do localStorage
+            var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Adicionar novo usuário à lista
+            usuarios.push(usuario);
+
+            // Armazenar a lista atualizada de usuários no localStorage
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            // Limpar formulário
+            document.getElementById('cadastroForm').reset();
+
+            alert('Cadastro realizado com sucesso!');
+        }
+    </script>
+    <script src="script.js"></script>
+    <script>
+        let chatboxOpen = false;
+    
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatboxOpen ? 'none' : 'block';
+            chatboxOpen = !chatboxOpen;
+    
+            if (chatboxOpen) {
+                simulateMessage("Olá! Como posso ajudar?");
+            }
+        }
+    
+        function simulateMessage(message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const newMessage = document.createElement('div');
+            newMessage.className = 'message';
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+        }
+    
+        function sendMessage(event) {
+            if (event.key === 'Enter') {
+                const userInput = document.getElementById('user-input');
+                const userMessage = userInput.value;
+                simulateMessage(`Você: ${userMessage}`);
+                userInput.value = '';
+    
+                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
+                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
+            }
+        }
+    </script>  
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2023 GreenHouse</p>
+    </footer>
+</body>
+</html>

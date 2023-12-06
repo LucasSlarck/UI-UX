@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>    
+        <img class="logo" src="Logo.png">
+        <h1>Lista de Usuarios</h1>
+        <span class="menu-btn" onclick="toggleMenu()">&#9776; Menu</span>
+    </header>
+    
+    <nav id="main-menu">
+        <a href="Pagina_inicial.html">Home</a>
+        <a href="Pagina_cadastro.html">Cadastro</a>
+        <a href="Pagina_lista.html">Lista de usuarios</a>
+        <a href="Pagina_loja.html">LOJA</a>
+    </nav>
+    <h2>Usuarios Cadastrados</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Senha</th>
+                <th>ADM</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaUsuarios">
+            <!-- Conteúdo da tabela será preenchido dinamicamente com JavaScript -->
+        </tbody>
+    </table>
+    <div class="botao-flutuante" onclick="toggleChatbox()">
+        <div class="icone">🤖</div>
+    </div>
+    
+    <div id="chatbox">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Digite sua mensagem" onkeydown="sendMessage(event)">
+    </div>
+ 
+    <script src="script.js"></script>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2023 GreenHouse</p>
+    </footer>
+    <script>
+        let chatboxOpen = false;
+    
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatboxOpen ? 'none' : 'block';
+            chatboxOpen = !chatboxOpen;
+    
+            if (chatboxOpen) {
+                simulateMessage("Olá! Como posso ajudar?");
+            }
+        }
+    
+        function simulateMessage(message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const newMessage = document.createElement('div');
+            newMessage.className = 'message';
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+        }
+    
+        function sendMessage(event) {
+            if (event.key === 'Enter') {
+                const userInput = document.getElementById('user-input');
+                const userMessage = userInput.value;
+                simulateMessage(`Você: ${userMessage}`);
+                userInput.value = '';
+    
+                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
+                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br, E en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Loja Online</title>
+</head>
+<body>
+
+    <header>    
+        <img class="logo" src="Logo.png">
+        <h1>Loja Online</h1>
+        <span class="menu-btn" onclick="toggleMenu()">&#9776; Menu</span>
+    </header>
+    
+    <nav id="main-menu">
+        <a href="Pagina_inicial.html">Home</a>
+        <a href="Pagina_cadastro.html">Cadastro</a>
+        <a href="Pagina_lista.html">Lista de usuarios</a>
+        <a href="Pagina_loja.html">LOJA</a>
+    </nav>
+    <button id="toggleCartBtn" onclick="toggleCarrinho()">Mostrar/Esconder Carrinho</button>
+
+    <div class="product-container">
+        <div class="product" id="product1">
+            <img src="Orq (1).jpg" alt="Produto 1">
+            <h2>Orquidea Comum</h2>
+            <p>R$ 50,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 1', 50.00)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product" id="product2">
+            <img src="Orq (2).jpg" alt="Produto 2"> 
+            <h2>Branquidea</h2>
+            <p>R$ 25,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 2', 25.00)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product" id="product1">
+            <img src="Orq (3).jpg" alt="Produto 3">
+            <h2>    Yugatan</h2>
+            <p>R$ 150,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 1', 50.00)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product" id="product1">
+            <img src="Orq (4).jpg" alt="Produto 1">
+            <h2>Trifillius</h2>
+            <p>R$ 50,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 1', 50.00)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product" id="product1">
+            <img src="Orq (5).jpg" alt="Produto 1">
+            <h2>Elloquines</h2>
+            <p>R$ 10,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 1', 50.00)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product" id="product1">
+            <img src="Orq (6).jpg" alt="Produto 1">
+            <h2>Grifitarius</h2>
+            <p>R$ 250,00</p>
+            <button onclick="adicionarAoCarrinho('Produto 1', 50.00)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- Adicione mais produtos conforme necessário -->
+    </div>
+
+    
+
+    <!-- Envolve o carrinho em um contêiner adicional -->
+    <div id="carrinhoContainer" class="cart-container">
+        <h2>Carrinho de Compras</h2>
+        <ul id="carrinhoItens"></ul>
+        <p>Total: R$ <span id="totalCarrinho">0.00</span></p>
+        <button class="finalizarcompra" onclick="finalizarCompra()" ondblclick="rem">Finalizar Compra</button>
+        
+    </div>
+    <div class="botao-flutuante" onclick="toggleChatbox()">
+        <div class="icone">🤖</div>
+    </div>
+    
+    <div id="chatbox">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Digite sua mensagem" onkeydown="sendMessage(event)">
+    </div>
+
+    <script src="Script.js"></script>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2023 GreenHouse</p>
+    </footer>
+    <script>
+        let chatboxOpen = false;
+    
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatboxOpen ? 'none' : 'block';
+            chatboxOpen = !chatboxOpen;
+    
+            if (chatboxOpen) {
+                simulateMessage("Olá! Como posso ajudar?");
+            }
+        }
+    
+        function simulateMessage(message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const newMessage = document.createElement('div');
+            newMessage.className = 'message';
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+        }
+    
+        function sendMessage(event) {
+            if (event.key === 'Enter') {
+                const userInput = document.getElementById('user-input');
+                const userMessage = userInput.value;
+                simulateMessage(`Você: ${userMessage}`);
+                userInput.value = '';
+    
+                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
+                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
+            }
+        }
+    </script>
+</body>
+
+</html>
