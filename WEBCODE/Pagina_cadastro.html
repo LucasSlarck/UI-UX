@@ -46,69 +46,8 @@
         <input type="text" id="user-input" placeholder="Digite sua mensagem" onkeydown="sendMessage(event)">
     </div>
 
-    <script>
-        function cadastrar() {
-            // Obter valores do formulário
-            var nome = document.getElementById('nome').value;
-            var email = document.getElementById('email').value;
-            var senha = document.getElementById('senha').value;
-
-            // Criar objeto de usuário
-            var usuario = {
-                nome: nome,
-                email: email,
-                senha: senha
-            };
-
-            // Obter lista de usuários do localStorage
-            var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-
-            // Adicionar novo usuário à lista
-            usuarios.push(usuario);
-
-            // Armazenar a lista atualizada de usuários no localStorage
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-            // Limpar formulário
-            document.getElementById('cadastroForm').reset();
-
-            alert('Cadastro realizado com sucesso!');
-        }
-    </script>
+    
     <script src="script.js"></script>
-    <script>
-        let chatboxOpen = false;
-    
-        function toggleChatbox() {
-            const chatbox = document.getElementById('chatbox');
-            chatbox.style.display = chatboxOpen ? 'none' : 'block';
-            chatboxOpen = !chatboxOpen;
-    
-            if (chatboxOpen) {
-                simulateMessage("Olá! Como posso ajudar?");
-            }
-        }
-    
-        function simulateMessage(message) {
-            const chatMessages = document.getElementById('chat-messages');
-            const newMessage = document.createElement('div');
-            newMessage.className = 'message';
-            newMessage.textContent = message;
-            chatMessages.appendChild(newMessage);
-        }
-    
-        function sendMessage(event) {
-            if (event.key === 'Enter') {
-                const userInput = document.getElementById('user-input');
-                const userMessage = userInput.value;
-                simulateMessage(`Você: ${userMessage}`);
-                userInput.value = '';
-    
-                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
-                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
-            }
-        }
-    </script>  
     <footer>
         <nav>
             <ul>

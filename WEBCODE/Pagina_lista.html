@@ -35,16 +35,7 @@
             <!-- Conteúdo da tabela será preenchido dinamicamente com JavaScript -->
         </tbody>
     </table>
-    <div class="botao-flutuante" onclick="toggleChatbox()">
-        <div class="icone">🤖</div>
-    </div>
-    
-    <div id="chatbox">
-        <div id="chat-messages"></div>
-        <input type="text" id="user-input" placeholder="Digite sua mensagem" onkeydown="sendMessage(event)">
-    </div>
- 
-    <script src="script.js"></script>
+     
     <footer>
         <nav>
             <ul>
@@ -55,38 +46,6 @@
         </nav>
         <p>&copy; 2023 GreenHouse</p>
     </footer>
-    <script>
-        let chatboxOpen = false;
-    
-        function toggleChatbox() {
-            const chatbox = document.getElementById('chatbox');
-            chatbox.style.display = chatboxOpen ? 'none' : 'block';
-            chatboxOpen = !chatboxOpen;
-    
-            if (chatboxOpen) {
-                simulateMessage("Olá! Como posso ajudar?");
-            }
-        }
-    
-        function simulateMessage(message) {
-            const chatMessages = document.getElementById('chat-messages');
-            const newMessage = document.createElement('div');
-            newMessage.className = 'message';
-            newMessage.textContent = message;
-            chatMessages.appendChild(newMessage);
-        }
-    
-        function sendMessage(event) {
-            if (event.key === 'Enter') {
-                const userInput = document.getElementById('user-input');
-                const userMessage = userInput.value;
-                simulateMessage(`Você: ${userMessage}`);
-                userInput.value = '';
-    
-                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
-                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

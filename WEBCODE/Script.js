@@ -1,11 +1,42 @@
-// Adicione esta lógica ao seu script.js
+function toggleMenu() {
+    var menu = document.getElementById('main-menu');
+    menu.classList.toggle('active');
+}
 
 let carrinho = [];
 let totalCarrinho = 0;
 
-// Adicione esta lógica ao seu script.js
-
-// ...
+let chatboxOpen = false;
+    
+function toggleChatbox() {
+    const chatbox = document.getElementById('chatbox');
+    chatbox.style.display = chatboxOpen ? 'none' : 'block';
+    chatboxOpen = !chatboxOpen;
+    
+    if (chatboxOpen) {
+        simulateMessage("Olá! Como posso ajudar?");
+    }
+}
+    
+function simulateMessage(message) {
+    const chatMessages = document.getElementById('chat-messages');
+    const newMessage = document.createElement('div');
+    newMessage.className = 'message';
+    newMessage.textContent = message;
+    chatMessages.appendChild(newMessage);
+}
+    
+function sendMessage(event) {
+    if (event.key === 'Enter') {
+        const userInput = document.getElementById('user-input');
+        const userMessage = userInput.value;
+        simulateMessage(`Você: ${userMessage}`);
+        userInput.value = '';
+    
+        // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
+        setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
+    }
+}
 
 function adicionarAoCarrinho(nomeProduto, precoProduto) {
     carrinho.push({ nome: nomeProduto, preco: precoProduto });
@@ -22,7 +53,6 @@ function removerDoCarrinho(index) {
     // Atualiza a exibição do carrinho
     exibirCarrinho();
 }
-// Adicione esta lógica ao seu script.js
 
 let carrinhoVisivel = true;
 
@@ -36,6 +66,7 @@ function toggleCarrinho() {
         carrinhoContainer.style.display = 'none';
     }
 }
+
 function exibirCarrinho() {
     const carrinhoItens = document.getElementById('carrinhoItens');
     const totalCarrinhoElement = document.getElementById('totalCarrinho');
@@ -68,6 +99,7 @@ function exibirCarrinho() {
         carrinhoContainer.style.display = 'block';
     }
 }
+
 function finalizarCompra() {
     if (carrinho.length === 0) {
         alert('Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.');
@@ -81,10 +113,6 @@ function finalizarCompra() {
     }
 }
 
-function toggleMenu() {
-    var menu = document.getElementById('main-menu');
-    menu.classList.toggle('active');
-}
 // Função para carregar e exibir usuários do localStorage
 function carregarUsuarios() {
     // Obter lista de usuários do localStorage
@@ -94,7 +122,7 @@ function carregarUsuarios() {
     var tabela = document.getElementById('tabelaUsuarios');
 
     // Limpar o conteúdo atual da tabela
-    tabela.innerHTML = '';
+    tabela.innerHTML = "";
 
     // Preencher a tabela com os dados dos usuários
     usuarios.forEach(function(usuario, index) {
@@ -107,43 +135,6 @@ function carregarUsuarios() {
         colunaNome.textContent = usuario.nome;
         colunaEmail.textContent = usuario.email;
         colunaSenha.textContent = usuario.senha;
-
-        // Adicionar botão de remoção
-        var botaoRemover = document.createElement('button');
-        botaoRemover.textContent = 'Remover';
-        botaoRemover.className = 'botao-remover';
-        botaoRemover.onclick = function() {
-            removerUsuario(index);
-        };
-
-        colunaAcao.appendChild(botaoRemover);
-    });
-}
-
-   // Função para carregar e exibir usuários do localStorage
-   function carregarUsuarios() {
-    // Obter lista de usuários do localStorage
-    var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-
-    // Obter a referência à tabela
-    var tabela = document.getElementById('tabelaUsuarios');
-
-    // Limpar o conteúdo atual da tabela
-    tabela.innerHTML = '';
-
-    // Preencher a tabela com os dados dos usuários
-    usuarios.forEach(function(usuario, index) {
-        var linha = tabela.insertRow();
-        var colunaNome = linha.insertCell(0);
-        var colunaEmail = linha.insertCell(1);
-        var colunaSenha = linha.insertCell(2);
-        var colunaAdmin = linha.insertCell(3);
-        var colunaAcao = linha.insertCell(4);
-
-        colunaNome.textContent = usuario.nome;
-        colunaEmail.textContent = usuario.email;
-        colunaSenha.textContent = usuario.senha;
-        colunaAdmin.textContent = usuario.admin ? 'Sim' : 'Não';
 
         // Adicionar botão de remoção
         var botaoRemover = document.createElement('button');
@@ -205,20 +196,6 @@ function cadastrar() {
 
     alert('Cadastro realizado com sucesso!');
 }
-
 // Carregar usuários ao carregar a página
 carregarUsuarios();
 
-document.getElementById('expand-btn').addEventListener('click', function() {
-  var options = document.querySelector('.options');
-  options.style.display = options.style.display === 'none' ? 'block' : 'none';
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var searchButton = document.getElementById('searchButton');
-    var searchBar = document.querySelector('.search-bar');
-
-    searchButton.addEventListener('click', function () {
-        searchBar.style.display = (searchBar.style.display === 'none' || searchBar.style.display === '') ? 'block' : 'none';
-    });
-});

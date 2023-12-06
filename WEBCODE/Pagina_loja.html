@@ -65,7 +65,7 @@
 
     
 
-    <!-- Envolve o carrinho em um contêiner adicional -->
+
     <div id="carrinhoContainer" class="cart-container">
         <h2>Carrinho de Compras</h2>
         <ul id="carrinhoItens"></ul>
@@ -93,39 +93,7 @@
         </nav>
         <p>&copy; 2023 GreenHouse</p>
     </footer>
-    <script>
-        let chatboxOpen = false;
     
-        function toggleChatbox() {
-            const chatbox = document.getElementById('chatbox');
-            chatbox.style.display = chatboxOpen ? 'none' : 'block';
-            chatboxOpen = !chatboxOpen;
-    
-            if (chatboxOpen) {
-                simulateMessage("Olá! Como posso ajudar?");
-            }
-        }
-    
-        function simulateMessage(message) {
-            const chatMessages = document.getElementById('chat-messages');
-            const newMessage = document.createElement('div');
-            newMessage.className = 'message';
-            newMessage.textContent = message;
-            chatMessages.appendChild(newMessage);
-        }
-    
-        function sendMessage(event) {
-            if (event.key === 'Enter') {
-                const userInput = document.getElementById('user-input');
-                const userMessage = userInput.value;
-                simulateMessage(`Você: ${userMessage}`);
-                userInput.value = '';
-    
-                // Aqui você pode adicionar lógica para processar a mensagem do usuário ou chamar a API do chatbot real
-                setTimeout(() => simulateMessage('Bot: Desculpe, estou simulando e não tenho respostas reais.'), 500);
-            }
-        }
-    </script>
 </body>
 
 </html>
